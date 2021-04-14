@@ -1,40 +1,33 @@
-## DB設計
+# README
 
-## users テーブル
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
+Things you may want to cover:
 
-### Association
+* Ruby version
 
-- has_many :items
-- has_many :messages
+* System dependencies
 
-## items テーブル
+* Configuration
 
+<<<<<<< HEAD
 | Column                              | Type       | Options           |
 |-------------------------------------|------------|-------------------|
 | title                               | string     | null: false       |
 | concept                             | text       | null: false       |
 | image                               | text       | null: false       |
 | user                                | references | foreign_key: true |
+=======
+* Database creation
+>>>>>>> parent of 29bbb29 (テーブル設計)
 
-### Association
+* Database initialization
 
-- has_many :users, through: room_users
-- has_many :messages
+* How to run the test suite
 
-## messages テーブル
+* Services (job queues, cache servers, search engines, etc.)
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| content | string     |                                |
-| user    | references | null: false, foreign_key: true |
+* Deployment instructions
 
-### Association
-
-- belongs_to :user
-- has_many :items
+* ...
