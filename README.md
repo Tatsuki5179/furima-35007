@@ -18,6 +18,7 @@
 | Column                              | Type       | Options           |
 |-------------------------------------|------------|-------------------|
 | title                               | string     | null: false       |
+| concept                             | text       | null: false       |
 | image                               | text       | null: false       |
 | user                                | references | foreign_key: true |
 
