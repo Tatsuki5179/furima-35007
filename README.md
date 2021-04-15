@@ -9,6 +9,12 @@
 | name               | string              | null: false                |
 | nickname           | string              | null: false                |
 | name_reading       | string              | null: false                |
+| bithday            | string              | null: false                |
+| last_name          | string              | null: false                |
+| first_name         | string              | null: false                |
+| last_name_kana     | string              | null: false                |
+| first_name_kana    | string              | null: false                |
+
 
 ### Association
 
@@ -19,10 +25,14 @@
 
 | Column                              | Type       | Options           |
 |-------------------------------------|------------|-------------------|
-| title                               | string     | null: false       |
-| catch_copy                          | text       | null: false       |
-| concept                             | text       | null: false       |
-| user                                | references | foreign_key: true |
+| product_name                        | string     | null: false       |
+| product_description                 | text       | null: false       |
+| product_price                       | text       | null: false       |
+| product_condition                   | text       | null: false       |
+| shipping_charges                    | text       | null: false       |
+| shipping_area                       | text       | null: false       |
+| days_ship                           | date       | null: false       |
+| category                            | text       | null: false       |
 
 ### Association
 
@@ -34,10 +44,11 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| prefecture    | integer    | null: false, foreign_key: true |
+| prefecture    | integer    | user_id, foreign_key: true     |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
 | building_name | string     | null: false                    |
+| phone_number  | string     | null: false                    |
 
 ### Association
 
