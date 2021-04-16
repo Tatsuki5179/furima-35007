@@ -27,7 +27,7 @@
 | product_description                 | text       | null: false       |
 | product_price                       | integer    | null: false       |
 | product_condition_id                | integer    | null: false       |
-| shipping_charges_id                 | integer    | null: false       |
+| shipping_charge_id                  | integer    | null: false       |
 | shipping_area_id                    | integer    | null: false       |
 | days_ship_id                        | integer    | null: false       |
 | category_id                         | integer    | null: false       |
@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :products
+- has_one :product
 
 ## addresses テーブル
 
@@ -48,10 +48,11 @@
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
+| product       | references | foreign_key: true              |
 
 ### Association
 
-- belongs_to :products
+- belongs_to :product
 
 ## products table
 
@@ -60,6 +61,10 @@
 | user          | references | foreign_key: true              |
 | item          | references | foreign_key: true              |
 
+### Association
 
+- has_many :users
+- has_many :items
+- has_many :addresses
 
 
