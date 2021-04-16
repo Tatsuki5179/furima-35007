@@ -40,15 +40,15 @@
 
 ## addresses テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| postal_code   | string     | null: false                    |
-| prefecture    | integer    | null: false                    |
-| city          | string     | null: false                    |
-| house_number  | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | string     | null: false                    |
-| product       | references | foreign_key: true              |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| postal_code         | string     | null: false                    |
+| shipping_area_id    | integer    | null: false                    |
+| city                | string     | null: false                    |
+| house_number        | string     | null: false                    |
+| building_name       | string     |                                |
+| phone_number        | string     | null: false                    |
+| product             | references | foreign_key: true              |
 
 ### Association
 
@@ -63,8 +63,8 @@
 
 ### Association
 
-- has_many :users
-- has_many :items
-- has_many :addresses
+- belongs_to :user
+- belongs_to :item
+- has_one :addresse
 
 
