@@ -6,9 +6,7 @@
 |--------------------|---------------------|----------------------------|
 | email              | string              | null: false, unique: true  |
 | encrypted_password | string              | null: false                |
-| name               | string              | null: false                |
 | nickname           | string              | null: false                |
-| name_reading       | string              | null: false                |
 | bithday            | date                | null: false                |
 | last_name          | string              | null: false                |
 | first_name         | string              | null: false                |
@@ -19,7 +17,7 @@
 ### Association
 
 * has_many :items
-* has_many :addresses
+* has_many :products
 
 ## items table
 
@@ -28,35 +26,40 @@
 | product_name                        | string     | null: false       |
 | product_description                 | text       | null: false       |
 | product_price                       | integer    | null: false       |
-| product_condition                   | text       | null: false       |
-| shipping_charges_id                 | text       | null: false       |
-| shipping_area_id                    | text       | null: false       |
-| days_ship                           | date       | null: false       |
+| product_condition_id                | integer    | null: false       |
+| shipping_charges_id                 | integer    | null: false       |
+| shipping_area_id                    | integer    | null: false       |
+| days_ship_id                        | integer    | null: false       |
 | category_id                         | integer    | null: false       |
+| user                                | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many :addresses
+- has_one :products
 
 ## addresses テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| prefecture    | integer    | user_id, foreign_key: true     |
+| prefecture    | integer    | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
-| building_name | string     | null: false                    |
+| building_name | string     |                                |
 | phone_number  | string     | null: false                    |
 
 ### Association
 
-- belongs_to :items
-- belongs_to :user
+- belongs_to :products
 
-## product table
+## products table
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| user          | string     | user_id, foreign_key: true     |
+| user          | references | foreign_key: true              |
+| item          | references | foreign_key: true              |
+
+
+
+
