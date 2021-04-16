@@ -9,7 +9,7 @@
 | name               | string              | null: false                |
 | nickname           | string              | null: false                |
 | name_reading       | string              | null: false                |
-| bithday            | string              | null: false                |
+| bithday            | date                | null: false                |
 | last_name          | string              | null: false                |
 | first_name         | string              | null: false                |
 | last_name_kana     | string              | null: false                |
@@ -27,12 +27,12 @@
 |-------------------------------------|------------|-------------------|
 | product_name                        | string     | null: false       |
 | product_description                 | text       | null: false       |
-| product_price                       | text       | null: false       |
+| product_price                       | integer    | null: false       |
 | product_condition                   | text       | null: false       |
-| shipping_charges                    | text       | null: false       |
-| shipping_area                       | text       | null: false       |
+| shipping_charges_id                 | text       | null: false       |
+| shipping_area_id                    | text       | null: false       |
 | days_ship                           | date       | null: false       |
-| category                            | text       | null: false       |
+| category_id                         | integer    | null: false       |
 
 ### Association
 
@@ -54,3 +54,9 @@
 
 - belongs_to :items
 - belongs_to :user
+
+## product table
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| user          | string     | user_id, foreign_key: true     |
