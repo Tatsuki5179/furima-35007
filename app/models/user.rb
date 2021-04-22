@@ -14,9 +14,5 @@ with_options presence: true do
   validates :firstname,             format: {with: /\A[ぁ-んァ-ン一-龥]/ }
   validates :lastnamekana,          format: {with: /\A[ァ-ヶー－]+\z/ }
   validates :firstnamekana,         format: {with: /\A[ァ-ヶー－]+\z/ }
-
-
-
-
-  
+ end
 end
