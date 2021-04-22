@@ -16,9 +16,10 @@
     </ul>
     <ul class='lists-right'>
       
-      <% if user_signed_in? %>
+      
       <div class="user_nav grid-6">
       <ul class="user__info">
+      <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, "#{current_user.id}", class: "user-nickname" %></li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
         <% else %>

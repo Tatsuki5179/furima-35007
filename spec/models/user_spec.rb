@@ -1,66 +1,76 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
-  before do
-    @user = FactoryBot.build(:user)
-  end
+  describe '#create' do
+    before do
+      @user = FactoryBot.build(:user)
+end
 
-  it "全ての項目の入力が存在すれば登録できること" do
-    user = build(:user)
-    expect(user).to be_valid
-  end
 
-  it "nicknameがない場合は登録できないこと" do 
-    user = build(:user, nickname: nil) 
-    user.valid? 
-    expect(user.errors[:nickname]).to include("を入力してください") 
-  end
+it "nicknameが空だと登録できない" do
+  @user.nickname = nil
+  @user.valid?
+  expect(@user.errors.full_messages).to include("Nickname can't be blank")
+end
+it "emailが空だと登録できない" do
+  @user.email = nil
+  @user.valid?
+  expect(@user.errors.full_messages).to include("Email can't be blank")
+end
+it "emailに一意性がないと登録できない" do
+  @user.save
+  another_user = FactoryBot.build(:user, email: @user.email)
+  another_user.valid?
+  expect(another_user.errors.full_messages).to include("Email has already been taken")
+end
 
-  it "emailがない場合は登録できないこと" do
-    user = build(:user, email: nil)
-    user.valid?
-    expect(user.errors[:email]).to include("を入力してください")
-  end
+it "passwordが6文字以上であれば登録できること" do
+  @user.password = "123456"
+  @user.password_confirmation = '123456'
+  expect(@user).to be_valid
+end
 
-  it 'password:半角英数混合(半角英語のみ)' do
-    @user.password = 'aaaaaaa'
-    @user.valid?
-    expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
-  end
+it "passwordがない場合は登録できないこと" do
+  @user.password =  ""
+  @user.valid?
+  expect(@user.errors[:password]).to include("can't be blank")
+end
 
-  it "encrypted_passwordがない場合は登録できないこと" do
-    user = build(:user, encrypted_password: nil)
-    user.valid?
-    expect(user.errors[:encrypted_password]).to include("を入力してください")
-  end
+it "password_confirmationがない場合は登録できないこと" do
+  @user.password_confirmation = ""
+  @user.valid?
+  expect(@user.errors[:password_confirmation]).to include("doesn't match Password")
+end
 
-  it "last_nameがない場合は登録できないこと" do
-    user = build(:user, family_name: nil)
-    user.valid?
-    expect(user.errors[:family_name]).to include("を入力してください")
-  end
+it "last_nameが全角入力でなければ登録できないこと" do
+  @user.last_name = "ｱｲｳｴｵ"
+  @user.valid?
+  expect(@user.errors[:last_name]).to include("is invalid")
+end
 
-  it "last_name_kanaがない場合は登録できないこと" do
-    user = build(:user, family_name_kana: nil)
-    user.valid?
-    expect(user.errors[:family_name_kana]).to include("を入力してください")
-  end
+it "first_nameが全角入力でなければ登録できないこと" do
+  @user.first_name = "ｱｲｳｴｵ"
+  @user.valid?
+  expect(@user.errors[:first_name]).to include("is invalid")
+end
 
-  it "first_nameがない場合は登録できないこと" do
-    user = build(:user, first_name: nil)
-    user.valid?
-    expect(user.errors[:first_name]).to include("を入力してください")
-  end
 
-  it "first_name_kanaがない場合は登録できないこと" do
-    user = build(:user, first_name_kana: nil)
-    user.valid?
-    expect(user.errors[:first_name_kana]).to include("を入力してください")
-  end
+it "last_name_kanaが全角カタカナでなければ登録できないこと" do
+  @user.last_name_kana = "あいうえお"
+  @user.valid?
+  expect(@user.errors[:last_name_kana]).to include("is invalid")
+end
 
-  it "birth_dayがない場合は登録できないこと" do
-    user = build(:user, birth_day: nil)
-    user.valid?
-    expect(user.errors[:birth_day]).to include("を入力してください")
-  end
+it "first_name_kanaが全角カタカナでなければ登録できないこと" do
+  @user.first_name_kana = "あいうえお"
+  @user.valid?
+  expect(@user.errors[:first_name_kana]).to include("is invalid")
+end
+
+it "birth_dateがない場合は登録できないこと" do
+  @user.birth_date = ""
+  @user.valid?
+  expect(@user.errors[:birth_date]).to include("can't be blank")
+end
 end
 end
