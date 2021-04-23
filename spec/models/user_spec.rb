@@ -12,10 +12,10 @@ describe 'ユーザー新規登録' do
     last_name_kana、first_name_kana、birthdayが存在すれば登録できる' do
       expect(@user).to be_valid
     end
-
     it "passwordが6文字以上であれば登録できること" do
-      @user.password = "123456"
-      @user.password_confirmation = '123456'
+      @user.password = "Yama5179"
+      @user.password_confirmation = "Yama5179"
+      @user.valid?
       expect(@user).to be_valid
     end
   end
@@ -27,6 +27,7 @@ it "nicknameが空だと登録できない" do
   @user.valid?
   expect(@user.errors.full_messages).to include("Nickname can't be blank")
 end
+
 it "emailが空だと登録できない" do
   @user.email = nil
   @user.valid?
@@ -45,6 +46,13 @@ it "emailに@が含まれていない場合登録できない" do
   expect(@user.errors[:email]).to include("is invalid")
 end
 
+it "password_confirmationが一致しない場合登録できない" do
+  @user = User.new(email: 'test@test.com', password: 'hogehoge', password_confirmation: 'hoge')
+  @user.valid?
+    expect(@user.errors[:password_confirmation]).to be_present
+  end
+
+
 it "passwordがない場合は登録できないこと" do
   @user.password =  ""
   @user.valid?
@@ -55,13 +63,23 @@ it "passwordが半角英数字混合でなければ登録できない(英字の�
   @user.password = "asdzxc"
   @user.password_confirmation = "asdzxc"
   @user.valid?
-  expect(@user).to be_valid
+  expect(@user.errors[:password]).to include("is invalid")
 end
 
-it "passwordが数字のみは登録できないこと" do
 
+it "passwordが半角英数字混合でなければ登録できない(数字のみ)" do
+  @user.password = "123456"
+  @user.password_confirmation = "123456"
+  @user.valid?
+  expect(@user.errors[:password]).to include("is invalid")
+end
 
-
+it "passwordが全角英数混合は登録できない" do
+  @user.password = "ｱｲｳ１２３"
+  @user.password_confirmation = "ｱｲｳ１２３"
+  @user.valid?
+  expect(@user.errors[:password]).to include("is invalid")
+end
 it "password_confirmationがない場合は登録できないこと" do
   @user.password_confirmation = ""
   @user.valid?
