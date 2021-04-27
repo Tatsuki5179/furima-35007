@@ -14,14 +14,12 @@ with_options presence: true do
   validates :product_description
   validates :image
 end
-   with_options format: { with: 正規表現 } do
-    validates :product_condition_id,  numericality: { other_than: 1, message: "Select" }
-    validates :shipping_charge_id, numericality: { other_than: 1, message: "Select" }
-    validates :shipping_area_id,  numericality: { other_than: 1, message: "Select" }
-    validates :days_ship_id,  numericality: { other_than: 1, message: "Select" }
-    validates :category_id,  numericality: { other_than: 1, message: "Select" }
-   end
-   with_options numericality: { with: 正規表現 } do
+   with_options numericality: { other_than: 1, message: "Select" } do
+    validates :product_condition_id
+    validates :shipping_charge_id
+    validates :shipping_area_id
+    validates :days_ship_id
+    validates :category_id
     validates :product_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-   end
  end
+end
