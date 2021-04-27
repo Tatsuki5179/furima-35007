@@ -20,6 +20,9 @@ end
     validates :shipping_area_id
     validates :days_ship_id
     validates :category_id
-    validates :product_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
- end
+   end
+
+   with_options numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 } do
+    validates :product_price
+  end
 end

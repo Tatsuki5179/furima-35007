@@ -30,40 +30,70 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Product description can't be blank")
       end
 
+      it 'product_conditionが空だと出品できない' do
+        @item.product_condition_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Product condition Select")
+      end
+
+      it 'categoryが空だと出品できない' do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category Select")
+      end
+
+      it 'shipping_chargeが空だと出品できない' do
+        @item.shipping_charge_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping charge Select")
+      end
+
+      it 'shipping_areaが空だと出品できない' do
+        @item.shipping_area_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area Select")
+      end
+
+      it 'days_shipが空だと出品できない' do
+        @item.days_ship_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Days ship Select")
+      end
+
       it 'categoryが未選択だと出品できない' do
         @item.category_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category Select")
       end
 
       it 'product_conditionが未選択だと出品できない' do
         @item.product_condition_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Product condition can't be blank")
+        expect(@item.errors.full_messages).to include("Product condition Select")
       end
 
       it 'shipping_chargeが未選択だと出品できない' do
         @item.shipping_charge_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping charge can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping charge Select")
       end
 
       it 'shipping_areaが未選択だと出品できない' do
         @item.shipping_area_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping area can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping area Select")
       end
 
       it 'days_shipが未選択だと出品できない' do
         @item.days_ship_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Days ship can't be blank")
+        expect(@item.errors.full_messages).to include("Days ship Select")
       end
 
       it 'product_priceが空だと出品できない' do
         @item.product_price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Product price can't be blank")
+        expect(@item.errors.full_messages).to include("Product price is not a number")
       end
 
       it "product_priceが299以下だと登録できないこと" do
@@ -83,6 +113,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Product price is not a number")
       end
+
+      it 'categoryで1が選択された場合だと出品できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category Select")
+        end
+
+      it 'product_conditionで1が選択された場合だと出品できない' do
+          @item.product_condition_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Product condition Select")
+          end
+
+      it 'shipping_chargeで1が選択された場合だと出品できない' do
+         @item.shipping_charge_id = 1
+         @item.valid?
+         expect(@item.errors.full_messages).to include("Shipping charge Select")
+       end
+      
+       it 'shipping_areaで1が選択された場合だと出品できない' do
+        @item.shipping_area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area Select")
+       end
+
+       it 'days_shipで1が選択された場合だと出品できない' do
+        @item.days_ship_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Days ship Select")
+       end
     end
   end
 end
